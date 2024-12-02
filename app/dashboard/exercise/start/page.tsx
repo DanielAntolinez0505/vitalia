@@ -14,6 +14,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 const exercisesByType = {
   Cardio: {
@@ -51,6 +53,7 @@ interface ExerciseLog {
 }
 
 export default function StartExercisePage() {
+  const { toast } = useToast();
   const [selectedType, setSelectedType] = useState<
     keyof typeof exercisesByType | "Personalizado" | null
   >(null);
@@ -145,15 +148,27 @@ export default function StartExercisePage() {
       setCurrentSet(1);
       setCurrentRep(0);
       setDistanceCovered(0);
+      toast({
+        title: "Ejercicio iniciado",
+        description: `Has comenzado ${currentExercise}. ¡Buena suerte!`,
+      });
     } else {
-      alert(
-        "Configuración Incompleta: Por favor, configura correctamente el ejercicio."
-      );
+      toast({
+        title: "Configuración incompleta",
+        description: "Por favor, configura correctamente el ejercicio.",
+        variant: "destructive",
+      });
     }
   };
 
   const handlePause = () => {
     setIsPaused(!isPaused);
+    toast({
+      title: isPaused ? "Ejercicio reanudado" : "Ejercicio pausado",
+      description: isPaused
+        ? "Continúa con tu entrenamiento."
+        : "Toma un breve descanso.",
+    });
   };
 
   const handleStop = () => {
@@ -163,6 +178,10 @@ export default function StartExercisePage() {
     setTimeLeft(0);
     setDistanceCovered(0);
     addExerciseToLog();
+    toast({
+      title: "Ejercicio detenido",
+      description: "Tu progreso ha sido guardado.",
+    });
   };
 
   const handleComplete = () => {
@@ -170,8 +189,18 @@ export default function StartExercisePage() {
       setCurrentSet(currentSet + 1);
       setCurrentRep(0);
       setTimeLeft(exerciseConfig.time);
+      toast({
+        title: "Serie completada",
+        description: `Comienza la serie ${currentSet + 1} de ${
+          exerciseConfig.sets
+        }.`,
+      });
     } else {
       handleStop();
+      toast({
+        title: "Ejercicio completado",
+        description: "¡Buen trabajo! Has terminado el ejercicio.",
+      });
     }
   };
 
@@ -192,9 +221,10 @@ export default function StartExercisePage() {
 
   const finishWorkout = () => {
     handleStop();
-    alert(
-      "Entrenamiento Terminado: Tu entrenamiento ha sido guardado correctamente."
-    );
+    toast({
+      title: "Entrenamiento terminado",
+      description: "Tu entrenamiento ha sido guardado correctamente.",
+    });
     setTimeout(() => {
       setTodaysExercises([]);
       setCurrentExercise("");
@@ -483,6 +513,7 @@ export default function StartExercisePage() {
           </Button>
         )}
       </div>
+      <Toaster />
     </>
   );
 }
