@@ -9,12 +9,22 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 interface UserProfile {
   name: string;
   email: string;
   phone: string;
   birthday: string;
+  isActive: boolean;
+  role: string;
   isActive: boolean;
   role: string;
 }
@@ -25,6 +35,8 @@ const ProfileSettings: React.FC = () => {
     email: "",
     phone: "",
     birthday: "",
+    isActive: true,
+    role: "Usuario",
     isActive: true,
     role: "Usuario",
   });
@@ -49,6 +61,35 @@ const ProfileSettings: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    toast({
+      title: "Cambios guardados",
+      description: "Los cambios en tu perfil han sido guardados exitosamente.",
+    });
+  };
+
+  const handleDeleteAccount = () => {
+    toast({
+      title: "Cuenta eliminada",
+      description: "Tu cuenta ha sido eliminada permanentemente.",
+      variant: "destructive",
+    });
+  };
+
+  const handleResetPassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPassword) {
+      toast({
+        title: "Contraseña restablecida",
+        description: "Tu contraseña ha sido restablecida exitosamente.",
+      });
+      setIsResettingPassword(false);
+    } else {
+      toast({
+        title: "Error",
+        description: "Por favor ingrese una nueva contraseña.",
+        variant: "destructive",
+      });
+    }
     toast({
       title: "Cambios guardados",
       description: "Los cambios en tu perfil han sido guardados exitosamente.",
@@ -106,7 +147,28 @@ const ProfileSettings: React.FC = () => {
                 onChange={handleChange}
               />
             </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Nombre:</Label>
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                value={profile.name}
+                onChange={handleChange}
+              />
+            </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="email">Correo Electrónico:</Label>
+              <Input
+                type="email"
+                id="email"
+                name="email"
+                value={profile.email}
+                onChange={handleChange}
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="email">Correo Electrónico:</Label>
               <Input
@@ -128,7 +190,27 @@ const ProfileSettings: React.FC = () => {
                 onChange={handleChange}
               />
             </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">Teléfono:</Label>
+              <Input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={profile.phone}
+                onChange={handleChange}
+              />
+            </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="birthday">Fecha de Cumpleaños:</Label>
+              <Input
+                type="date"
+                id="birthday"
+                name="birthday"
+                value={profile.birthday}
+                onChange={handleChange}
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="birthday">Fecha de Cumpleaños:</Label>
               <Input

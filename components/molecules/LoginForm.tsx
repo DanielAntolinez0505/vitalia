@@ -61,7 +61,7 @@ export default function LoginForm() {
       </CardContent>
       <CardFooter className="flex flex-col space-y-4">
         <Button type="submit" className="w-full">
-          Iniciar Sesión
+          <Link href="/dashboard">Iniciar Sesión</Link>
         </Button>
         <div className="flex flex-col sm:flex-row justify-between w-full space-y-2 sm:space-y-0 sm:space-x-2">
           <Button variant="link" className="text-sm">

@@ -115,7 +115,11 @@ export function Sidebar({ isMinimized, toggleMinimize }: SidebarProps) {
             onClick={() => console.log("Cerrar sesión")}
           >
             <LogOut className={`h-6 w-6 ${isMinimized ? "" : "mr-2"}`} />
-            {!isMinimized && <span>Cerrar sesión</span>}
+            {!isMinimized && (
+              <span>
+                <Link href="/">Cerrar Sesión</Link>
+              </span>
+            )}
           </Button>
         </SidebarFooter>
         <Button
