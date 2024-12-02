@@ -39,8 +39,16 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+}
+
 // Datos ficticios de usuarios
-const usersData = [
+const usersData: User[] = [
   {
     id: 1,
     name: "Juan Pérez",
@@ -128,11 +136,11 @@ const usersData = [
 ];
 
 export default function UserAdministrationPage() {
-  const [users, setUsers] = useState(usersData);
-  const [filteredUsers, setFilteredUsers] = useState(users);
+  const [users, setUsers] = useState<User[]>(usersData);
+  const [filteredUsers, setFilteredUsers] = useState<User[]>(users);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const usersPerPage = 5;
 
@@ -161,12 +169,12 @@ export default function UserAdministrationPage() {
     setSearchTerm(e.target.value);
   };
 
-  const handleEdit = (user: any) => {
+  const handleEdit = (user: User) => {
     // Lógica para editar usuario
     console.log("Editar usuario:", user);
   };
 
-  const handleToggleVisibility = (user: any) => {
+  const handleToggleVisibility = (user: User) => {
     const updatedUsers = users.map((u) =>
       u.id === user.id
         ? { ...u, status: u.status === "Activo" ? "Inactivo" : "Activo" }
@@ -175,12 +183,12 @@ export default function UserAdministrationPage() {
     setUsers(updatedUsers);
   };
 
-  const handleDelete = (user: any) => {
+  const handleDelete = (user: User) => {
     const updatedUsers = users.filter((u) => u.id !== user.id);
     setUsers(updatedUsers);
   };
 
-  const handleUserClick = (user: any) => {
+  const handleUserClick = (user: User) => {
     setSelectedUser(user);
     setIsDialogOpen(true);
   };
@@ -210,7 +218,7 @@ export default function UserAdministrationPage() {
             <TableRow
               key={user.id}
               onClick={() => handleUserClick(user)}
-              className="cursor-pointer hover:bg-gray-500"
+              className="cursor-pointer hover:bg-gray-100"
             >
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
