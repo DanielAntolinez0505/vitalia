@@ -6,13 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
@@ -52,9 +46,7 @@ const UserPreferences: React.FC = () => {
     setPreferences({ ...preferences, measurementUnit: value });
   };
 
-  const handlePrivacySettingChange = (
-    setting: keyof UserPreferences["privacySettings"]
-  ) => {
+  const handlePrivacySettingChange = (setting: keyof UserPreferences['privacySettings']) => {
     setPreferences({
       ...preferences,
       privacySettings: {
@@ -64,9 +56,7 @@ const UserPreferences: React.FC = () => {
     });
   };
 
-  const handleSocialMediaChange = (
-    platform: keyof UserPreferences["socialMedia"]
-  ) => {
+  const handleSocialMediaChange = (platform: keyof UserPreferences['socialMedia']) => {
     setPreferences({
       ...preferences,
       socialMedia: {
@@ -120,9 +110,7 @@ const UserPreferences: React.FC = () => {
                 <Switch
                   id="profileVisibility"
                   checked={preferences.privacySettings.profileVisibility}
-                  onCheckedChange={() =>
-                    handlePrivacySettingChange("profileVisibility")
-                  }
+                  onCheckedChange={() => handlePrivacySettingChange('profileVisibility')}
                 />
                 <Label htmlFor="profileVisibility">Perfil Visible</Label>
               </div>
@@ -130,9 +118,7 @@ const UserPreferences: React.FC = () => {
                 <Switch
                   id="activitySharing"
                   checked={preferences.privacySettings.activitySharing}
-                  onCheckedChange={() =>
-                    handlePrivacySettingChange("activitySharing")
-                  }
+                  onCheckedChange={() => handlePrivacySettingChange('activitySharing')}
                 />
                 <Label htmlFor="activitySharing">Compartir Actividad</Label>
               </div>
@@ -145,7 +131,7 @@ const UserPreferences: React.FC = () => {
                   <Checkbox
                     id="facebook"
                     checked={preferences.socialMedia.facebook}
-                    onCheckedChange={() => handleSocialMediaChange("facebook")}
+                    onCheckedChange={() => handleSocialMediaChange('facebook')}
                   />
                   <Label htmlFor="facebook">Facebook</Label>
                 </div>
@@ -153,7 +139,7 @@ const UserPreferences: React.FC = () => {
                   <Checkbox
                     id="twitter"
                     checked={preferences.socialMedia.twitter}
-                    onCheckedChange={() => handleSocialMediaChange("twitter")}
+                    onCheckedChange={() => handleSocialMediaChange('twitter')}
                   />
                   <Label htmlFor="twitter">Twitter</Label>
                 </div>
@@ -161,7 +147,7 @@ const UserPreferences: React.FC = () => {
                   <Checkbox
                     id="instagram"
                     checked={preferences.socialMedia.instagram}
-                    onCheckedChange={() => handleSocialMediaChange("instagram")}
+                    onCheckedChange={() => handleSocialMediaChange('instagram')}
                   />
                   <Label htmlFor="instagram">Instagram</Label>
                 </div>
