@@ -49,6 +49,13 @@ export const menuItems: MenuItem[] = [
       { icon: "Paintbrush", label: "Personalización", href: "/dashboard/settings/personalization" },
     ],
   },
+  {
+    icon: "ShieldAlert",
+    label: "Admin",
+    items: [
+      {icon: "User", label: "Administrar Usuarios", href: "/dashboard/admin/users"}
+    ]
+  },
 ];
 
 export const chartOptions: ChartOptions<"line"> = {
