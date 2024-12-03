@@ -5,7 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -66,7 +72,9 @@ const PaymentSettings: React.FC = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="accountHolder">Nombre del Titular de la Cuenta</Label>
+              <Label htmlFor="accountHolder">
+                Nombre del Titular de la Cuenta
+              </Label>
               <Input
                 id="accountHolder"
                 name="accountHolder"
@@ -81,7 +89,9 @@ const PaymentSettings: React.FC = () => {
               <Label htmlFor="cardType">Tipo de Tarjeta</Label>
               <Select
                 value={paymentInfo.cardType}
-                onValueChange={(value: string) => handleChange("cardType", value)}
+                onValueChange={(value: string) =>
+                  handleChange("cardType", value)
+                }
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecciona el tipo de tarjeta" />
@@ -89,7 +99,9 @@ const PaymentSettings: React.FC = () => {
                 <SelectContent>
                   <SelectItem value="Visa">Visa</SelectItem>
                   <SelectItem value="MasterCard">MasterCard</SelectItem>
-                  <SelectItem value="American Express">American Express</SelectItem>
+                  <SelectItem value="American Express">
+                    American Express
+                  </SelectItem>
                   <SelectItem value="Discover">Discover</SelectItem>
                 </SelectContent>
               </Select>
